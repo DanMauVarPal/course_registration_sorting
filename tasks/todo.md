@@ -32,9 +32,9 @@ Full design and rationale: [plan.md](plan.md)
 ## Phase 2: Experiments and report
 
 ### Task 4: Timing experiment (S)
-- [ ] `scripts/benchmark.py`: layered random DAGs, V = 1k…64k, E ≈ 4V, fixed seed, best of 3
-- [ ] Asserts `is_topological_order`; prints V, E, V+E, ms, ns per (V+E)
-- [ ] Verify: `uv run python scripts/benchmark.py` finishes in well under a minute
+- [x] `scripts/benchmark.py`: layered random DAGs, V = 1k…64k, E ≈ 4V, fixed seed, best of 3
+- [x] Asserts `is_topological_order`; prints V, E, V+E, ms, ns per (V+E)
+- [x] Verify: `uv run python scripts/benchmark.py` finishes in about 1 s
 - Files: `scripts/benchmark.py` — Deps: 1
 
 ### Task 5: Report (.docx) (M)
