@@ -30,7 +30,8 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(g.topological_sort(), ["a", "b", "c"])
 
     def test_pre_post_numbers_by_hand(self):
-        # explore(a): a pre 1, b pre 2, d pre 3, d post 4, b post 5, c pre 6, c post 7, a post 8; then e 9/10
+        # explore(a): a pre 1, b pre 2, d pre 3, d post 4, b post 5, c pre 6, c post 7, a post 8;
+        # then explore(e): e pre 9, post 10
         pre, post = diamond().dfs()
         self.assertEqual(pre, {"a": 1, "b": 2, "d": 3, "c": 6, "e": 9})
         self.assertEqual(post, {"d": 4, "b": 5, "c": 7, "a": 8, "e": 10})

@@ -50,7 +50,8 @@ class Graph:
 
     def explore(self, v: str) -> None:
         """Visit everything reachable from v. Called by dfs(), which sets up the state."""
-        # shortcut: recursion depth = longest path; Python stops near 1000 frames, use an explicit stack for deeper graphs.
+        # shortcut: recursion depth = longest path and Python stops near 1000 frames,
+        # use an explicit stack for deeper graphs.
         self.visited[v] = True
         self.previsit(v)
 
@@ -76,7 +77,9 @@ class Graph:
         return sorted(post, key=post.get, reverse=True)
 
 
-def is_topological_order(vertices: list[str], edges: list[tuple[str, str]], order: list[str]) -> bool:
+def is_topological_order(
+    vertices: list[str], edges: list[tuple[str, str]], order: list[str]
+) -> bool:
     """True if order lists each vertex exactly once and every edge v -> u has v before u."""
     if sorted(order) != sorted(vertices):
         return False

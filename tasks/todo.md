@@ -38,13 +38,13 @@ Full design and rationale: [plan.md](plan.md)
 - Files: `scripts/benchmark.py` — Deps: 1
 
 ### Task 5: Report (.docx) (M)
-- [ ] Sections: problem interpretation, methodology, experimental results, conclusions,
-      future work, team considerations (placeholders for names/roles), appendix on running the code
-- [ ] Tables pasted from real program and benchmark output
-- [ ] Verify: open/render the .docx and cross-check numbers
+- [x] Sections: problem interpretation, methodology, experimental results, conclusions,
+      future work, team considerations (placeholders for names/roles), appendices on running the code and full source
+- [x] Tables pasted from real program and benchmark output
+- [x] Verify: rendered to PDF and checked page by page; passes Word schema validation
 - Files: `report/Project2_Report.docx` — Deps: 3, 4
 
 ### Checkpoint B
-- [ ] Tests pass, program and benchmark run clean
-- [ ] Report has all 4 required components + future work + team section
+- [x] Tests pass, program and benchmark run clean
+- [x] Report has all 4 required components + future work + team section
 - [ ] User fills in team names/roles and reviews before submitting

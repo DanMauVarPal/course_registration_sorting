@@ -1,17 +1,18 @@
-"""Time topological_sort on random DAGs of growing size; a flat ns/(V+E) column means linear time."""
+"""Time topological_sort on random DAGs of growing size; flat ns/(V+E) means linear time."""
 
 import random
 import timeit
 
 from course_registration_sorting.graph import Graph, is_topological_order
 
-LEVELS = 50  # edges only go to later levels (like semesters), so DFS recursion depth stays under 50
+LEVELS = 50  # edges only go to later levels (like semesters), so DFS depth stays under 50
 
 
 def random_dag(n_vertices: int, n_edges: int) -> Graph:
     block = n_vertices // LEVELS
     graph = Graph()
-    for v in random.sample(range(n_vertices), n_vertices):  # shuffled, so DFS does not just follow index order
+    # shuffled, so DFS does not just follow index order
+    for v in random.sample(range(n_vertices), n_vertices):
         graph.add_vertex(str(v))
     for _ in range(n_edges):
         u = random.randrange(n_vertices - block)
@@ -31,7 +32,8 @@ def main() -> None:
 
         best = min(timeit.repeat(graph.topological_sort, number=1, repeat=3))
         size = n_vertices + n_edges
-        print(f"{n_vertices:>7} {n_edges:>8} {size:>8} {best * 1e3:>8.1f} {best * 1e9 / size:>9.0f}")
+        ns_per_element = best * 1e9 / size
+        print(f"{n_vertices:>7} {n_edges:>8} {size:>8} {best * 1e3:>8.1f} {ns_per_element:>9.0f}")
 
 
 if __name__ == "__main__":

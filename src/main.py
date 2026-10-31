@@ -7,7 +7,8 @@ def main() -> None:
     order = graph.topological_sort()
 
     for i, course in enumerate(order, 1):
-        print(f"{i:2}. {course} - {TITLES[course]} (pre {graph.pre[course]}, post {graph.post[course]})")
+        pre, post = graph.pre[course], graph.post[course]
+        print(f"{i:2}. {course} - {TITLES[course]} (pre {pre}, post {post})")
 
     valid = is_topological_order(graph.vertices(), graph.edges(), order)
     print(f"\nAll {len(graph.edges())} prerequisites respected: {valid}")
