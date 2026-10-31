@@ -34,17 +34,19 @@ dfs(G): all v unvisited; for all v in V: if !v.visited: explore(G, v)          p
   give a wrong order.
 - **Recursion depth** = longest prerequisite chain (6 for the course data). Python allows ~1000 frames;
   recorded as a `shortcut:` comment in `explore` (switch to an explicit stack for deeper graphs).
-- `is_topological_order(edges, order)`: every vertex once, every edge u→v has u before v. Oracle for
+- `is_topological_order(vertices, edges, order)`: every vertex once, every edge u→v has u before v. Oracle for
   tests and the benchmark.
-- **Course data** (`courses.py`): `COURSES` = adjacency list, prerequisite → courses it unlocks
-  (e.g. `"CS 1411": ["CS 1412", "CS 1382"]`), every course a key (empty list if it unlocks nothing);
-  `TITLES` = code → name for printing. Sanity numbers: 29 courses, 30 edges.
+- **Course data** (`courses.py`): `PREREQS` = adjacency list typed exactly as the assignment lists it,
+  course → its prerequisites (e.g. `"CS 3364": ["CS 2413", "CS 1382", "MATH 2360"]`), so it can be
+  checked line by line against the handout; `TITLES` = code → name for printing. `course_graph()`
+  flips each pair into an edge prerequisite → course, so DFS gives prerequisites the higher post
+  numbers. Sanity numbers: 29 courses, 30 edges.
 - **Tests**: stdlib `unittest`, no new dependency.
 - **Report**: generated once with the `anthropic-skills:docx` skill; no doc library added to the project.
 
 ## Files
 - `src/course_registration_sorting/graph.py` — Graph, CycleError, is_topological_order (new)
-- `src/course_registration_sorting/courses.py` — `COURSES`, `TITLES` (new)
+- `src/course_registration_sorting/courses.py` — `PREREQS`, `TITLES`, `course_graph()` (new)
 - `src/course_registration_sorting/main.py` — `main()` (new); placeholder removed from `__init__.py`
 - `pyproject.toml` — script entry → `course_registration_sorting.main:main`, description
 - `scripts/benchmark.py` — timing experiment (new)
@@ -68,17 +70,16 @@ Write `tasks/plan.md` (this document) and `tasks/todo.md` (checklist of Tasks 1�
 disconnected parts, a small graph with pre/post numbers checked by hand, cycle, self-loop.
 **Files:** `graph.py`, `tests/test_graph.py`. **Deps:** none.
 
-### Task 2: Course adjacency list (S) — highest risk: hand-inverting prerequisites
+### Task 2: Course adjacency list (S)
 **Acceptance:**
-- [ ] `COURSES` has 29 keys and 30 edges; `TITLES` has the same 29 keys
-- [ ] Test holds the prerequisites exactly as the assignment writes them (course → its prereqs) and checks
-      that the edges of `COURSES` are exactly those pairs reversed — catches any transcription slip
-- [ ] Resulting order passes `is_topological_order` against that independent prerequisite list
-**Verify:** unittest suite; spot-check CS 3364 comes after CS 2413, CS 1382, MATH 2360.
+- [x] `PREREQS` and `TITLES` have the same 29 keys
+- [x] `course_graph()` has exactly those 29 vertices (a typo'd prerequisite would add a 30th) and 30 edges
+- [x] Resulting order passes `is_topological_order` against the pairs in `PREREQS`; first course has no prerequisites
+**Verify:** unittest suite (19 tests pass); printed order checked by eye.
 **Files:** `courses.py`, `tests/test_courses.py`. **Deps:** 1.
 
 ### Task 3: main.py (XS)
-`main()` builds the Graph from `COURSES`, runs the sort, prints a numbered list
+`main()` imports `course_graph()` and `TITLES`, runs the sort, prints a numbered list
 `1. CS 1411 - Programming Principles I (pre 1, post 12)` and a final line confirming all 30
 prerequisites are respected. Move entry point to `main.py`, update pyproject script + README.
 **Verify:** `uv run course-registration-sorting` prints 29 lines + check line.
@@ -123,7 +124,7 @@ real program output (pasted, not hand-typed).
 ## Risks
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Slip when inverting prerequisites into the adjacency list | High | Test compares against the assignment's prerequisite list as written; edge count 30 |
+| Typo when copying the course list | High | Data typed as the handout writes it; tests check 29 vertices, 30 edges, valid order |
 | Recursion limit on deep graphs | Low | Course depth is 6; benchmark uses bounded-depth DAGs; noted as future work |
 | Timing noise on small sizes | Low | Best of 3, sizes doubling to 64k |
 | Report numbers drift from code | Med | Paste results straight from program output |

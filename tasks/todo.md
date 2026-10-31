@@ -5,18 +5,18 @@ Full design and rationale: [plan.md](plan.md)
 ## Phase 1: Algorithm and data
 
 ### Task 1: Graph ADT + DFS pre/post + topological sort (S)
-- [ ] `dfs()` returns pre/post numbers from one shared clock; every edge u→v has post[u] > post[v] on a DAG
-- [ ] `topological_sort()` returns every vertex once, ordered by decreasing post; first vertex is a source
-- [ ] Cycle or self-loop raises `CycleError`
-- [ ] Verify: `uv run python -m unittest discover -s tests` (empty, single, chain, diamond, disconnected,
-      hand-checked pre/post, cycle, self-loop)
+- [x] `dfs()` returns pre/post numbers from one shared clock; every edge u→v has post[u] > post[v] on a DAG
+- [x] `topological_sort()` returns every vertex once, ordered by decreasing post; first vertex is a source
+- [x] Cycle or self-loop raises `CycleError`
+- [x] Verify: `uv run python -m unittest discover -s tests` (empty, single, chain, diamond, disconnected,
+      hand-checked pre/post, cycle, self-loop) — 15 tests pass
 - Files: `src/course_registration_sorting/graph.py`, `tests/test_graph.py` — Deps: none
 
 ### Task 2: Course adjacency list (S)
-- [ ] `COURSES` has 29 keys and 30 edges; `TITLES` has the same 29 keys
-- [ ] Test compares `COURSES` edges against the prerequisites as written in the assignment
-- [ ] Resulting order passes `is_topological_order` against that independent list
-- [ ] Verify: unittest suite; CS 3364 after CS 2413, CS 1382, MATH 2360
+- [x] `PREREQS` (course → prerequisites, as the handout lists them) and `TITLES` have the same 29 keys
+- [x] `course_graph()` flips them into prerequisite → course edges: 29 vertices, 30 edges
+- [x] Resulting order passes `is_topological_order`; first course has no prerequisites
+- [x] Verify: unittest suite — 19 tests pass
 - Files: `src/course_registration_sorting/courses.py`, `tests/test_courses.py` — Deps: 1
 
 ### Task 3: main.py (XS)
