@@ -20,13 +20,13 @@ Full design and rationale: [plan.md](plan.md)
 - Files: `src/course_registration_sorting/courses.py`, `tests/test_courses.py` — Deps: 1
 
 ### Task 3: main.py (XS)
-- [ ] `main()` prints numbered course order with pre/post numbers and a "30 prerequisites respected" line
-- [ ] Entry point moved to `main.py`; pyproject script and README updated
-- [ ] Verify: `uv run course-registration-sorting` prints 29 lines + check line
+- [x] `main()` prints numbered course order with pre/post numbers and a "30 prerequisites respected" line
+- [x] Entry point moved to `main.py`; pyproject script and README updated
+- [x] Verify: `uv run course-registration-sorting` prints 29 lines + check line
 - Files: `main.py`, `__init__.py`, `pyproject.toml`, `README.md` — Deps: 2
 
 ### Checkpoint A
-- [ ] All tests pass; program output correct on course data
+- [x] All tests pass; program output correct on course data
 - [ ] User reviews the ordering before the report uses it
 
 ## Phase 2: Experiments and report
