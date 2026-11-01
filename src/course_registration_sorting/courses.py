@@ -68,7 +68,6 @@ TITLES: dict[str, str] = {
 
 
 def course_graph() -> Graph:
-    """Edges run prerequisite -> course, so DFS gives prerequisites the higher post numbers."""
     graph = Graph({course: [] for course in PREREQS})
     for course, prereqs in PREREQS.items():
         for prereq in prereqs:
