@@ -2,6 +2,8 @@
 
 from course_registration_sorting.graph import Graph
 
+# Prerequisits Reverse-Directed
+# FutureClass <- Prerequisit
 PREREQS: dict[str, list[str]] = {
     "CS 1411": [],
     "MATH 1451": [],
@@ -68,8 +70,20 @@ TITLES: dict[str, str] = {
 
 
 def course_graph() -> Graph:
-    graph = Graph({course: [] for course in PREREQS})
+    """Edges run prerequisite -> course, so DFS gives prerequisites the higher post numbers."""
+    # get vertices/nodes only since PREREQ dict is backwards
+    # course -> prereqs
+    # adj_dict: {"CS 1411": [], "MATH 1451": [], ...}
+    adj_dict = {course: [] for course in PREREQS}
+    graph = Graph(adj_dict)
+
+    # creates edges in Graph
+    # course: "CS 2350"
+    # prereqs: ["CS 1412", "ECE 2372"]
     for course, prereqs in PREREQS.items():
+        # prereq: "CS 1412"
         for prereq in prereqs:
+            # prereq -> course
             graph.add_edge(prereq, course)
+    
     return graph
