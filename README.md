@@ -9,6 +9,4 @@ using a DFS-based topological sort (vertices sorted by decreasing post number).
 
 ```
 uv run course-registration-sorting                 # print the course order
-uv run python -m unittest discover -s tests        # run the tests
-uv run python scripts/benchmark.py                 # time the sort on random graphs, 1k to 64k vertices
 ```
