@@ -1,2 +1,2 @@
-def main() -> None:
-    print("Hello from course-registration-sorting!")
+# marks src/course_registration_sorting/ as a package
+# allows imports between classes

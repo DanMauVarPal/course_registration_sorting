@@ -1,7 +1,7 @@
 [project]
 name = "course-registration-sorting"
 version = "0.1.0"
-description = "Add your description here"
+description = "Order CS major courses by prerequisites with a DFS topological sort (CS 3364 Project 2)"
 readme = "README.md"
 authors = [
     { name = "Daniel Mauricio Vargas Palomeque", email = "var28790@ttu.edu" }
@@ -10,7 +10,7 @@ requires-python = ">=3.14"
 dependencies = []
 
 [project.scripts]
-course-registration-sorting = "course_registration_sorting:main"
+course-registration-sorting = "course_registration_sorting.main:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]
